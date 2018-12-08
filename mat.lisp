@@ -102,7 +102,10 @@
 		      (:script :src "https://rawgit.com/flatiron/director/master/build/director.min.js")
 		      (:script :src "js/Cells.js")
 		      (:script :src "js/Model.js")
+
 		      (:script :src "js/mxWeb.js")
+		      (:script :src "js/app.js")
+		      (:script :src "js/Todo.js")
 		      )
 		  
 		     (:body (:h1 "script failed to load.")
@@ -114,7 +117,9 @@
 	     (string= "/common/index.css" path-info)
 	     (string= "/js/Cells.js" path-info)
 	     (string= "/js/Model.js" path-info)
-	     (string= "/js/mxWeb.js" path-info))
+	     (string= "/js/mxWeb.js" path-info)
+	     (string= "/js/app.js" path-info)
+	     (string= "/js/Todo.js" path-info))
 	 `(200 (:content-type "text/javascript; charset=utf-8")
 	       (,(let* ((fn (format nil "/home/martin/stage/cl-try-matrix-js/~a"
 				    (subseq path-info 1 (length path-info)))))
