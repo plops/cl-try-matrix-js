@@ -1,5 +1,5 @@
-goog.provide('Matrix.mxWeb');
-goog.require('Matrix.Model');
+//goog.provide('Matrix.mxWeb');
+//goog.require('Matrix.Model');
 var mxDom = []; // here we will link JS "mirror" DOM to actual DOM by their numerical ids
 
 var domLogging = false;
@@ -180,7 +180,7 @@ class TagSession extends Model {
 }
 
 window['TagSession'] = TagSession;
-goog.exportSymbol('mxwebtagsession', TagSession);
+//goog.exportSymbol('mxwebtagsession', TagSession);
 
 class Tag extends Model {
 	constructor(parent, name, attrs, islots) {
@@ -321,7 +321,7 @@ function tag2html(x) {
 
 window['tag2html'] = tag2html;
 
-goog.exportSymbol("tag2html", tag2html);
+//goog.exportSymbol("tag2html", tag2html);
 
 var isTag = x => x instanceof Tag;
 
@@ -512,7 +512,7 @@ const tagNames = ['a', 'abbr', 'acronym', 'address', 'applet', 'area', 'article'
 
 tagNames.map( tg => genTagEx( tg));
 
-
+/*
 goog.exportSymbol('a', a);
 goog.exportSymbol('abbr', abbr);
 goog.exportSymbol('acronym', acronym);
@@ -659,7 +659,7 @@ goog.exportSymbol('mxwvar', mxwvar);
 goog.exportSymbol('video', video);
 goog.exportSymbol('wbr', wbr);
 goog.exportSymbol('xmp', xmp);
-
+*/
 
 //-------------------------------------------------------------------------------
 // ---------------- in-line Style ----------------------------------------------
@@ -846,7 +846,7 @@ class MXStorable extends Model {
 
 window['MXStorable'] = MXStorable;
 
-goog.exportSymbol('MXStorable', MXStorable);
+//goog.exportSymbol('MXStorable', MXStorable);
 // goog.exportSymbol('loadAllItems', loadAllItems);
 
 

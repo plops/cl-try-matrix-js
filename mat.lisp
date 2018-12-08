@@ -83,17 +83,46 @@
 
 (let ((script-str
        (cl-js-generator::beautify-source
-	`(let-g ((bla 3))))))
+	`(let-g ((bla 3))
+		(setf document.body.innerHTML (Tag.toHTML (todoMVC)))))))
   (defun handler (env)
-    (destructuring-bind (&key server-name remote-addr remote-port &allow-other-keys) env
-      `(200 (:content-type "text/html; charset=utf-8")
-	    (,(cl-who:with-html-output-to-string (s)
-		(cl-who:htm
-		 (:html
-		  (:head (:title "cam"))
-		  (:body (:h2 "camera")
-			 (:script :type "text/javascript"
-				  (princ script-str s)
-				  ))))))))))
+    (destructuring-bind (&key server-name remote-addr path-info remote-port &allow-other-keys) env
+      (cond
+	((string= "/" path-info)
+	 `(200 (:content-type "text/html; charset=utf-8")
+	       (,(cl-who:with-html-output-to-string (s)
+		   (cl-who:htm
+		    (:html
+		     (:head
+		      (:meta :charset "utf-8")
+		      (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+		      (:title "matrixjs todomvc")
+		      (:link :rel "stylesheet" :href "common/base.css")
+		      (:link :rel "stylesheet" :href "common/index.css")
+		      (:script :src "https://rawgit.com/flatiron/director/master/build/director.min.js")
+		      (:script :src "js/Cells.js")
+		      (:script :src "js/Model.js")
+		      (:script :src "js/mxWeb.js")
+		      )
+		  
+		     (:body (:h1 "script failed to load.")
+			    (:p (princ env s))
+			    (:script :type "text/javascript"
+				     (princ script-str s)
+				     ))))))))
+	((or (string= "/common/base.css" path-info)
+	     (string= "/common/index.css" path-info)
+	     (string= "/js/Cells.js" path-info)
+	     (string= "/js/Model.js" path-info)
+	     (string= "/js/mxWeb.js" path-info))
+	 `(200 (:content-type "text/javascript; charset=utf-8")
+	       (,(let* ((fn (format nil "/home/martin/stage/cl-try-matrix-js/~a"
+				    (subseq path-info 1 (length path-info)))))
+		   (format t "file: ~a" fn)
+		   (with-open-file (s fn)
+		     (let* ((size (file-length s))
+			    (str (make-string size)))
+		       (read-sequence str s)
+		       str))))))))))
 
 

@@ -1,4 +1,4 @@
-goog.provide('Matrix.Cells');
+// goog.provide('Matrix.Cells');
 
 function clg(...args) {
     console.log(Array.from(args).join(","));

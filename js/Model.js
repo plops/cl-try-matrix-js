@@ -1,4 +1,4 @@
-goog.provide('Matrix.Model');
+//goog.provide('Matrix.Model');
 
 /* global kNascent, kUntilAsked, kAlways, kAwake, qAwaken,  Cell */
 //@formatter:off
